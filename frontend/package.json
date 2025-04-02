@@ -1,0 +1,67 @@
+{
+  "name": "obs-streaming-app",
+  "version": "1.0.0",
+  "description": "Electron app for OBS Studio streaming with WebRTC and Cloudflare Calls",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "electron-dev": "concurrently \"npm run dev\" \"wait-on [REDACTED SECRET] && electron .\"",
+    "package": "electron-builder build --win --mac --linux",
+    "start-backend": "cd ../backend && .\\venv\\Scripts\\activate.bat && python -m app.main",
+    "start-backend-unix": "cd ../backend && source venv/bin/activate && python -m app.main",
+    "start-all": "concurrently \"npm run start-backend-unix\" \"npm run electron-dev\""
+  },
+  "keywords": [
+    "electron",
+    "obs",
+    "streaming",
+    "webrtc",
+    "cloudflare"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "babel-loader": "^10.0.0",
+    "concurrently": "^8.2.2",
+    "css-loader": "^7.1.2",
+    "electron": "^35.1.2",
+    "electron-builder": "^26.0.12",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "wait-on": "^7.2.0",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "electron-log": "^5.1.0",
+    "socket.io-client": "^4.7.4"
+  },
+  "build": {
+    "appId": "com.electron.obs-streaming",
+    "productName": "OBS Streaming App",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "main.js",
+      "preload.js"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}

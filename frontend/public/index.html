@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' http://localhost:8000 ws://localhost:8000 wss://*.cloudflare.com; script-src 'self';">
+  <title>OBS Streaming App</title>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>OBS Streaming Control</h1>
+    </header>
+    
+    <main>
+      <div class="container">
+        <div class="status-panel">
+          <h2>Stream Status</h2>
+          <div id="status-indicator" class="status-offline">
+            <span id="status-text">Offline</span>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <span class="metric-label">Latency:</span>
+              <span id="latency-value">--</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Quality:</span>
+              <span id="quality-value">--</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Bitrate:</span>
+              <span id="bitrate-value">--</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="control-panel">
+          <h2>Stream Control</h2>
+          <div class="scene-selector">
+            <label for="scene-select">Scene:</label>
+            <select id="scene-select">
+              <option value="">Loading scenes...</option>
+            </select>
+          </div>
+          <div class="stream-controls">
+            <button id="start-stream" class="btn btn-primary">Start Stream</button>
+            <button id="stop-stream" class="btn btn-danger" disabled>Stop Stream</button>
+          </div>
+        </div>
+        
+        <div class="connection-panel">
+          <h2>Connection</h2>
+          <div class="connection-status">
+            <div class="connection-item">
+              <span class="connection-label">OBS:</span>
+              <span id="obs-status" class="connection-value">Not Connected</span>
+            </div>
+            <div class="connection-item">
+              <span class="connection-label">WebRTC:</span>
+              <span id="webrtc-status" class="connection-value">Not Connected</span>
+            </div>
+            <div class="connection-item">
+              <span class="connection-label">Cloudflare:</span>
+              <span id="cloudflare-status" class="connection-value">Not Connected</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <footer>
+      <p>OBS Streaming App with WebRTC and Cloudflare Calls</p>
+    </footer>
+  </div>
+</body>
+</html>
